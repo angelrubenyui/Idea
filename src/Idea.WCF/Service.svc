@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Idea.Models.Contracts.IExampleService" CodeBehind="Service.svc.cs" %>

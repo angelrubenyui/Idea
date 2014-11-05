@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  For more info on this file format visit http://docs.nuget.org/docs/reference/nuspec-reference.
+-->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">  
+  <metadata>
+    <id>Idea.Models</id>
+    <version>$version$</version>
+    <authors>jmanuelcorral</authors>
+    <description>Capa de modelos, lista para generar un paquete de nuget y redistribuirlo.</description>
+  </metadata>
+  <files>
+    <file src=".\bin\Release\*.dll" target="lib\net45" />
+  </files>
+</package>
