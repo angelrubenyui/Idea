@@ -49,6 +49,7 @@
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
@@ -70,9 +71,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceProxy\HttpConnector.cs" />
     <Compile Include="ServiceProxy\HttpsConnector.cs" />
+    <Compile Include="Validation\EntityValidator.cs" />
+    <Compile Include="Validation\IValidation.cs" />
+    <Compile Include="Validation\IValidationArgument.cs" />
+    <Compile Include="Validation\NIFValidation.cs" />
+    <Compile Include="Validation\ValidationArgument.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

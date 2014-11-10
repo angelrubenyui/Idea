@@ -10,24 +10,21 @@ using Idea.Models.DTOs;
 
 namespace Idea.WCF
 {
-    public class Service1 : IExampleService
+    public class Service1 : IMarketingService
     {
-        public string GetData(int value)
+
+        public List<ClienteDTO> GetClientsWithFacturationMoreBigThan(Decimal Amount)
         {
-            return string.Format("You entered: {0}", value);
+            return new List<ClienteDTO>();
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public List<ClienteDTO> GetClientsFromZipCode(String ZipCode)
         {
-            if (composite == null)
+            if (ZipCode == null)
             {
-                throw new ArgumentNullException("composite");
+                throw new ArgumentNullException("ZipCodeInvalid");
             }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+            return new List<ClienteDTO>();
         }
     }
 }

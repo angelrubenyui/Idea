@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FacturaManager.cs" />
     <Compile Include="IBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -46,6 +48,10 @@
     <ProjectReference Include="..\Idea.Common\Idea.Common.csproj">
       <Project>{47796f3d-3263-467e-9f08-db4ba8b29ae5}</Project>
       <Name>Idea.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Idea.Models\Idea.Models.csproj">
+      <Project>{f3ac4fdb-4efe-42d6-bdd3-c0b24fc7e3cd}</Project>
+      <Name>Idea.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
