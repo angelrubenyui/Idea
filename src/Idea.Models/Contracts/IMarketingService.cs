@@ -9,15 +9,13 @@ using System.Threading.Tasks;
 namespace Idea.Models.Contracts
 {
     [ServiceContract]
-    public interface IExampleService
+    public interface IMarketingService
     {
-        // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
+        [OperationContract]
+        List<ClienteDTO> GetClientsWithFacturationMoreBigThan(Decimal Amount);
 
         [OperationContract]
-        string GetData(int value);
-
-        [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        List<ClienteDTO> GetClientsFromZipCode(String ZipCode);
 
     }
 }

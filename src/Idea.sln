@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea.Frontend", "Idea.Front
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{46319C89-07E4-4C6B-B91C-7B8D7786915C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E6E4A009-4790-450D-A2F4-288AA4F35F99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea.Validation.Test", "Idea.Bussiness.Test\Idea.Validation.Test.csproj", "{61E4F4A5-FD43-420C-89BD-9A61B04D843A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,8 +57,15 @@ Global
 		{A2391FE7-96C6-44A6-AF65-282F224EAD45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2391FE7-96C6-44A6-AF65-282F224EAD45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2391FE7-96C6-44A6-AF65-282F224EAD45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61E4F4A5-FD43-420C-89BD-9A61B04D843A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61E4F4A5-FD43-420C-89BD-9A61B04D843A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61E4F4A5-FD43-420C-89BD-9A61B04D843A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61E4F4A5-FD43-420C-89BD-9A61B04D843A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{61E4F4A5-FD43-420C-89BD-9A61B04D843A} = {E6E4A009-4790-450D-A2F4-288AA4F35F99}
 	EndGlobalSection
 EndGlobal
