@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Idea.Common;
 
-namespace Idea.DAL.Repositories
+namespace Idea.DAL
 {
-    public interface IUnitOfWork<T> where T:class
+    public interface IUnitOfWork : IDisposable
     {
-        IRepository<T> Repository { get; }
-        void SaveChanges();
-    }
-
-    public interface IUnitOfWork
-    {
-        IRepository Repository { get; }
-        void SaveChanges();
+        Database Db { get;}
+        void Rollback();
+        void Commit();
     }
 }

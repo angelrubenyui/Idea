@@ -1,24 +1,16 @@
-﻿using Idea.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Idea.Common;
 
-namespace Idea.DAL.Repositories
+namespace Idea.DAL
 {
-    public interface IRepository<T> where T:class
+    public interface IRepository 
     {
-        void Add(T entity);
-        void Remove(T entity);
-        T Find(Int32 Id);
+        T GetById<T>(object primaryKey);
+        IEnumerable<T> Query<T>();
+        Page<T> PagedQuery<T>(long pageNumber, long itemsPerPage, string sql, params object[] args);
+        int Insert(object itemToAdd);
+        int Update(object itemToUpdate, object primaryKeyValue);
+        int Delete<T>(object primaryKeyValue);
     }
-
-    public interface IRepository
-    {
-        void Add(EntityBase entity);
-        void Remove(EntityBase entity);
-        EntityBase Find(Int32 Id);
-    }
+    
 }

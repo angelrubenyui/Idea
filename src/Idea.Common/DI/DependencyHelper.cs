@@ -27,6 +27,12 @@ namespace Idea.Common.DI
         {
             return DependencyHelper._unity.Resolve<T>();
         }
+
+        public static T ResolveWithInstance<T,K>(String name, K Instance)
+        {
+            return DependencyHelper._unity.Resolve<T>(new ParameterOverride(name, Instance));
+        }
+
     }
 
 }

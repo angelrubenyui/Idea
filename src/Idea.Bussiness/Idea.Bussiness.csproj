@@ -49,6 +49,10 @@
       <Project>{47796f3d-3263-467e-9f08-db4ba8b29ae5}</Project>
       <Name>Idea.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Idea.DAL\Idea.DAL.csproj">
+      <Project>{049624C2-6421-4DBB-815E-ABBB297DD0B5}</Project>
+      <Name>Idea.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Idea.Models\Idea.Models.csproj">
       <Project>{f3ac4fdb-4efe-42d6-bdd3-c0b24fc7e3cd}</Project>
       <Name>Idea.Models</Name>
