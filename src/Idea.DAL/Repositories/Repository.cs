@@ -18,9 +18,9 @@ namespace Idea.DAL
             mp = new StandardMapper();
         }
 
-        public Repository(IdeaContext context)
+        public T GetById<T>(object primaryKey)
         {
-            _context = context;
+            return uw.Db.Single<T>(primaryKey);
         }
 
         public IEnumerable<T> Query<T>()
@@ -34,21 +34,21 @@ namespace Idea.DAL
         {
             var pd = mp.GetTableInfo(typeof(T));
             var sql = "SELECT * FROM " + pd.TableName;
-            _dbSet = context.Set<T>();
+            return uw.Db.Fetch<T>(sql);
         }
         public List<TPassType> Fetch<TPassType>(string sql, params object[] args)
         {
             return uw.Db.Fetch<TPassType>(sql, args);
         }
-        
+
         public Page<T> PagedQuery<T>(long pageNumber, long itemsPerPage, string sql, params object[] args)
         {
             return uw.Db.Page<T>(pageNumber, itemsPerPage, sql, args) as Page<T>;
         }
 
-        public void Add(T entity) 
+        public int Insert(object itemToAdd)
         {
-            _dbSet.Add(entity);
+            return Convert.ToInt32(uw.Db.Insert(itemToAdd));
         }
 
         public int Insert(string tableName, string primaryKeyName, bool autoIncrement, object poco)

@@ -23,17 +23,13 @@ namespace Idea.Models.Entities
 
     public class ClientValidation : IValidation
     {
-        public List<IValidationArgument> Arguments { get; set; }
+        public List<ValidationArgument> Arguments { get; set; }
 
         public ClientValidation()
         {
-            Arguments = new List<IValidationArgument>();
+            Arguments = new List<ValidationArgument>();
         }
 
-        public IEnumerable<ValidationArguments> GetListOfArguments()
-        {
-            return (IEnumerable<ValidationArguments>) Arguments.AsEnumerable();
-        }
 
         public Boolean IsValid(Cliente cliente)
         {
@@ -42,17 +38,17 @@ namespace Idea.Models.Entities
             //Validaciones De Negocio
             if (!IsDNIValid(cliente))
             {
-                Arguments.Add(new ValidationArguments("Validación de Cliente: DNI Incorrecto"));
+                Arguments.Add(new ValidationArgument("IsLegal, DNI","Validación de Cliente: DNI Incorrecto"));
                 ret = false;
             }
             if (cliente.isLegal && !IsFilledIfLegal(cliente))
             {
-                Arguments.Add(new ValidationArguments("Validación de Cliente, No está informada la Razon social para un Cliente Jurídico"));
+                Arguments.Add(new ValidationArgument("IsLegal, Razon Social", "Validación de Cliente, No está informada la Razon social para un Cliente Jurídico"));
                 ret= false;
             }
             if (!cliente.isLegal && !IsFilledIfNoLegal(cliente))
             {
-                Arguments.Add(new ValidationArguments("Validación de Cliente, No está informado Nombre y Apellidos para un Cliente Físico"));
+                Arguments.Add(new ValidationArgument("IsLegal, Nombre, Apellido","Validación de Cliente, No está informado Nombre y Apellidos para un Cliente Físico"));
                 ret =false;
             }
             return ret;
