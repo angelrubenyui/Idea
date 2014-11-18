@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea.Bussiness", "Idea.Bussiness\Idea.Bussiness.csproj", "{ABE80E50-4C1E-494A-ABC9-B02F059B32F4}"
 EndProject
@@ -19,9 +19,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea.Frontend", "Idea.Front
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{46319C89-07E4-4C6B-B91C-7B8D7786915C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E6E4A009-4790-450D-A2F4-288AA4F35F99}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{E6E4A009-4790-450D-A2F4-288AA4F35F99}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea.Validation.Test", "Idea.Bussiness.Test\Idea.Validation.Test.csproj", "{61E4F4A5-FD43-420C-89BD-9A61B04D843A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea.Bussines.Test", "Idea.Bussines.Test\Idea.Bussines.Test.csproj", "{8C65B9AD-4F65-4842-B532-E0CBCA71139A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{DD8C92CF-AE67-4004-86B2-D76C8F822C83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea.Bussiness.Integration.Test", "Idea.Bussiness.Integration.Test\Idea.Bussiness.Integration.Test.csproj", "{C7FFF180-5D1E-4FF6-BFD6-177255A32CD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,11 +67,21 @@ Global
 		{61E4F4A5-FD43-420C-89BD-9A61B04D843A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61E4F4A5-FD43-420C-89BD-9A61B04D843A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61E4F4A5-FD43-420C-89BD-9A61B04D843A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C65B9AD-4F65-4842-B532-E0CBCA71139A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C65B9AD-4F65-4842-B532-E0CBCA71139A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C65B9AD-4F65-4842-B532-E0CBCA71139A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C65B9AD-4F65-4842-B532-E0CBCA71139A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7FFF180-5D1E-4FF6-BFD6-177255A32CD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7FFF180-5D1E-4FF6-BFD6-177255A32CD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7FFF180-5D1E-4FF6-BFD6-177255A32CD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7FFF180-5D1E-4FF6-BFD6-177255A32CD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{61E4F4A5-FD43-420C-89BD-9A61B04D843A} = {E6E4A009-4790-450D-A2F4-288AA4F35F99}
+		{8C65B9AD-4F65-4842-B532-E0CBCA71139A} = {E6E4A009-4790-450D-A2F4-288AA4F35F99}
+		{C7FFF180-5D1E-4FF6-BFD6-177255A32CD2} = {DD8C92CF-AE67-4004-86B2-D76C8F822C83}
 	EndGlobalSection
 EndGlobal

@@ -26,16 +26,11 @@ namespace Idea.Models.Entities
 
     public class FacturaValidation : IValidation
     {
-        public List<IValidationArgument> Arguments{get; set; }
-
-        public IEnumerable<ValidationArguments> GetListOfArguments()
-        {
-            return (IEnumerable<ValidationArguments>)Arguments.AsEnumerable();
-        }
+        public List<ValidationArgument> Arguments{get; set; }
 
         public FacturaValidation()
         {
-           Arguments = new List<IValidationArgument>();
+           Arguments = new List<ValidationArgument>();
         }
 
         public Boolean IsValid(Factura factura)
@@ -46,7 +41,7 @@ namespace Idea.Models.Entities
             ret = Validator.TryValidateObject(factura, validationContext, errors, true);
             if (!ret)
             {
-                errors.ForEach(x=> Arguments.Add(new ValidationArguments(x.ErrorMessage)));
+                errors.ForEach(x=> Arguments.Add(new ValidationArgument(x)));
             }
 
             return ret;

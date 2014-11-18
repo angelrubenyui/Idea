@@ -43,6 +43,7 @@ namespace Idea.Common.DI
         {
             //Registramos
             UnityContainer container = new UnityContainer();
+            //container.RegisterType(typeof(IUnit))
             //container.RegisterType(typeof(IBussines), typeof(BussinessImplementation), new InjectionProperty("Log", getCurrentLogger());
             return container;
         }

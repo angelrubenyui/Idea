@@ -18,4 +18,6 @@ namespace Idea.Models.Entities
        public DateTime DateDelete { get; set; }
        public String EntityComments { get; set; }
     }
+
+
 }

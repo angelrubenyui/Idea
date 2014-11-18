@@ -8,7 +8,7 @@ namespace Idea.Common.Validation
 {
     public interface IValidation
     {
-        List<IValidationArgument> Arguments { get; set; }
-        IEnumerable<ValidationArguments> GetListOfArguments();
+        List<ValidationArgument> Arguments { get; set; }
+  
     }
 }

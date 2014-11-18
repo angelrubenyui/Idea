@@ -1,63 +1,84 @@
-﻿using System.Linq;
-using System.Threading;
-using Idea.Common.Exceptions;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using Idea.Models.Entities;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Idea.Common;
 
-namespace Idea.DAL.Repositories
+namespace Idea.DAL
 {
-    public class Repository<T> : IRepository 
+    public class Repository
     {
-        private IUnitOfWork mUnitOfWork { get; set; } 
+        private IUnitOfWork uw;
+        private StandardMapper mp;
 
-        public Repository() 
+        public Repository(IUnitOfWork unitofWork)
         {
-            throw new EFContextNotSetException();
+            uw = unitofWork;
+            mp = new StandardMapper();
         }
 
-        public Repository(IUnitOfWork unitOfWork )
+        public Repository(IdeaContext context)
         {
-            mUnitOfWork = unitOfWork;
-        }
-   
-        public T GetById<T>(Int32 primaryKey)
-        {
-            return (T)mUnitOfWork.Context.Set(typeof(T)).Find(primaryKey);
+            _context = context;
         }
 
-        public IEnumerable<T> GetAll<T>() 
+        public IEnumerable<T> Query<T>()
         {
-            return (IEnumerable<T>)mUnitOfWork.Context.Set(typeof(T)).
+            var pd = mp.GetTableInfo(typeof(T));
+            var sql = "SELECT * FROM " + pd.TableName;
+            return uw.Db.Query<T>(sql);
         }
 
-        public PagedResult<T> PagedQuery<T>(Int32 pageNumber, Int32 pageSize) 
+        public List<T> Fetch<T>()
         {
-            PagedResult<T> myPageResult = new PagedResult<T>();
-            myPageResult.Collection = (IEnumerable<T>) mUnitOfWork.Context.entities.Select(m => m).Skip(pageSize * pageNumber).Take(pageSize).AsEnumerable();
-            myPageResult.NumberOfRegisters = mUnitOfWork.Context.entities.Count();
-            myPageResult.CurrentPage = pageNumber;
-            myPageResult.TotalPages = (myPageResult.NumberOfRegisters/pageSize) +
-                                      ((myPageResult.NumberOfRegisters%pageSize > 0) ? 1 : 0);
-            return myPageResult;
-
+            var pd = mp.GetTableInfo(typeof(T));
+            var sql = "SELECT * FROM " + pd.TableName;
+            _dbSet = context.Set<T>();
+        }
+        public List<TPassType> Fetch<TPassType>(string sql, params object[] args)
+        {
+            return uw.Db.Fetch<TPassType>(sql, args);
+        }
+        
+        public Page<T> PagedQuery<T>(long pageNumber, long itemsPerPage, string sql, params object[] args)
+        {
+            return uw.Db.Page<T>(pageNumber, itemsPerPage, sql, args) as Page<T>;
         }
 
-        public void Insert<T>(T itemToAdd) 
+        public void Add(T entity) 
         {
-            mUnitOfWork.Context.Set(typeof(T)).Add(itemToAdd);
+            _dbSet.Add(entity);
         }
 
-        public void Update<T>(T itemToUpdate, Int32 primaryKeyValue)
+        public int Insert(string tableName, string primaryKeyName, bool autoIncrement, object poco)
         {
-            var entity2Update = this.GetById<T>(primaryKeyValue);
-                entity2Update = itemToUpdate;
+            return Convert.ToInt32(uw.Db.Insert(tableName, primaryKeyName, autoIncrement, poco));
+        }
+        public int Insert(string tableName, string primaryKeyName, object poco)
+        {
+            return Convert.ToInt32(uw.Db.Insert(tableName, primaryKeyName, poco));
         }
 
-        public void Delete<T>(Int32 primaryKeyValue)
+        public int Update(object poco)
         {
-            mUnitOfWork.Context.Set(typeof (T)).Remove(primaryKeyValue);
+            return uw.Db.Update(poco);
         }
+
+        public int Update(object poco, object primaryKeyValue)
+        {
+            return uw.Db.Update(poco, primaryKeyValue);
+        }
+
+        public int Update(object poco, IEnumerable<string> columns)
+        {
+            return uw.Db.Update(poco, columns);
+        }
+
+        public int Delete<T>(object pocoOrPrimaryKey)
+        {
+            return uw.Db.Delete<T>(pocoOrPrimaryKey);
+        }
+
     }
 }

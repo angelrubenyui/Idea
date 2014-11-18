@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.Practices.Unity;
+using Idea.Common.DI;
+using Idea.DAL;
 
 namespace Idea.Bussiness.Integration.Test
 {
@@ -37,4 +40,4 @@ namespace Idea.Bussiness.Integration.Test
     }
 }
 
-}
+

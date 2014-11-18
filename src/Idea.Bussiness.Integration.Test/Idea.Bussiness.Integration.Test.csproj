@@ -35,6 +35,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -53,6 +62,27 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Idea.Bussiness\Idea.Bussiness.csproj">
+      <Project>{abe80e50-4c1e-494a-abc9-b02f059b32f4}</Project>
+      <Name>Idea.Bussiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Idea.Common\Idea.Common.csproj">
+      <Project>{47796f3d-3263-467e-9f08-db4ba8b29ae5}</Project>
+      <Name>Idea.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Idea.DAL\Idea.DAL.csproj">
+      <Project>{049624c2-6421-4dbb-815e-abbb297dd0b5}</Project>
+      <Name>Idea.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Idea.Models\Idea.Models.csproj">
+      <Project>{f3ac4fdb-4efe-42d6-bdd3-c0b24fc7e3cd}</Project>
+      <Name>Idea.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

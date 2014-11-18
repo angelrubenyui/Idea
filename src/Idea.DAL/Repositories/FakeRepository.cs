@@ -1,58 +1,62 @@
-﻿using System;
+﻿using Idea.Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using Idea.Models.Entities;
-using System.Reflection;
+using Idea.DAL.Repositories;
 
-namespace Idea.DAL.Repositories
+namespace Idea.DAL
 {
-    public class FakeRepository : IRepository
+    public class FakeRepository : IRepository 
     {
-        private Hashtable Storage { get; set; }
+        private FakeUnitOfWork uw { get; set; }
 
-        public FakeRepository()
+        public FakeRepository(IUnitOfWork unitofWork)
         {
-            Storage = new Hashtable();
+            uw = (FakeUnitOfWork)unitofWork;
         }
 
-        public T GetById<T>(Int32 primaryKey) 
+        public T GetById<T>(object primaryKey) 
         {
-            return (T)Storage[primaryKey];
+            return (T)uw.Get(primaryKey);
         }
 
-        public IEnumerable<T> GetAll<T>() 
+        public IEnumerable<T> Query<T>()  
         {
-            return (IEnumerable<T>)Storage.Values.Cast<T>().ToList();
+            return (IEnumerable<T>)uw.getAll();
         }
 
-        public PagedResult<T> PagedQuery<T>(Int32 pageNumber, Int32 pageSize) 
+        public Page<T> PagedQuery<T>(long pageNumber, long itemsPerPage, string sql, params object[] args)
         {
-            PagedResult<T> myPageResult = new PagedResult<T>();
-
-            myPageResult.Collection = (IEnumerable<T>)Storage.Values.Cast<T>().ToList().Skip(pageSize * pageNumber).Take(pageSize);
-            return myPageResult;
+            throw new NotImplementedException();
         }
 
-        public void Insert<T>(T itemToAdd) 
+        public int Insert(object itemToAdd)
         {
             PropertyInfo pId = itemToAdd.GetType().GetProperty("Id");
             if (pId != null)
             {
-                Storage.Add(pId.GetValue(itemToAdd), itemToAdd);
+                uw.Add(pId.GetValue(itemToAdd), itemToAdd);
+                return uw.Count();
             }
+            else return 0;
         }
 
-        public void Update<T>(T itemToUpdate, Int32 primaryKeyValue) 
+        public int Update(object itemToUpdate, object primaryKeyValue)
         {
-            Storage[primaryKeyValue] = itemToUpdate;
+            uw.Update(primaryKeyValue, itemToUpdate);
+            return uw.Count();
         }
 
-        public void Delete<T>(Int32 primaryKeyValue) 
+        public int Delete<T>(object primaryKeyValue) 
         {
-            Storage.Remove(primaryKeyValue);
+            uw.Remove(primaryKeyValue);
+            return uw.Count();
         }
     }
 }

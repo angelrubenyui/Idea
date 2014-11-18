@@ -1,41 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Idea.Models.Entities;
+using Idea.Common;
 
-namespace Idea.DAL.Repositories
+namespace Idea.DAL
 {
-    public class UnitOfWork<T> : IUnitOfWork, IDisposable where T:class
+    public class UnitOfWork : IUnitOfWork
     {
-        public IdeaContext Context { get; set; }
-        
-
-        public UnitOfWork(IdeaContext context)
-        {
-            Context = context;
-        }
+        private readonly Transaction _petaTransaction;
+        private readonly Database _db;
 
         public UnitOfWork()
         {
-            Context = new IdeaContext();
-            Context.Configuration.AutoDetectChangesEnabled = false;
-            Context.Configuration.LazyLoadingEnabled = true;
-            Context.Configuration.ValidateOnSaveEnabled = false;
-        }
-
-        public void Commit()
-        {
-            Context.SaveChanges();
+            _db = new Database("ConnectionString");
+            _petaTransaction = new Transaction(_db);
         }
 
         public void Dispose()
         {
-            Context.Dispose();
+            _petaTransaction.Dispose();
         }
 
-       
+        public Database Db
+        {
+            get { return _db; }
+        }
+
+        public void Commit()
+        {
+            _petaTransaction.Complete();
+        }
+
+        public void Rollback()
+        {
+            _db.AbortTransaction();
+        }
     }
 }

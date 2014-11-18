@@ -15,7 +15,7 @@ namespace Idea.Bussines.Test
         {
 
             //Generamos una factura valida  
-            Cliente cliente = new Cliente()
+            Cliente cliente = new Cliente
             {
                 id = 1,
                 Nombre = "Pepito",
@@ -43,7 +43,7 @@ namespace Idea.Bussines.Test
                 Cantidad = 1,
                 Descripcion = "prueba descripcion",
                 PrecioUnitario = 10,
-                IVA = IVAType.Normal,
+                IVA = IVAType.Normal
             };
 
             lf.PVP = (((lf.PrecioUnitario * lf.Cantidad) * (short)lf.IVA) / 100) + (lf.PrecioUnitario * lf.Cantidad);
@@ -55,6 +55,53 @@ namespace Idea.Bussines.Test
             lfs.Add(lf);
             bool resul = mngFactura.SaveFactura(cliente, factura, lfs);
             Assert.IsTrue(resul);
+        }
+
+        [TestMethod]
+        public void TestSaveFacturaFailsValidation()
+        {
+
+            //Generamos una factura valida  
+            Cliente cliente = new Cliente()
+            {
+                id = 1,
+                Nombre = "Pepito",
+                Apellidos = "Pacheco",
+                CodigoPostal = "08012",
+                DateCreation = DateTime.Now,
+                Direccion = "c/ El pez molon",
+                DNI = "12345678Z",
+                isLegal = false
+            };
+            Factura factura = new Factura()
+            {
+                id = 1,
+                clienteAsociado = cliente,
+                ClienteId = 1,
+                Codigo = "FAC001",
+                FechaEmision = DateTime.Now,
+                Importe = -5
+            };
+
+            LineaFactura lf = new LineaFactura()
+            {
+                id = 1,
+                FacturaId = 1,
+                Cantidad = 1,
+                Descripcion = "prueba descripcion",
+                PrecioUnitario = 10,
+                IVA = IVAType.Normal,
+            };
+
+            lf.PVP = (((lf.PrecioUnitario * lf.Cantidad) * (short)lf.IVA) / 100) + (lf.PrecioUnitario * lf.Cantidad);
+
+
+            //Llamamos al FacturaManager.Save
+            FacturaManager mngFactura = new FacturaManager();
+            List<LineaFactura> lfs = new List<LineaFactura>();
+            lfs.Add(lf);
+            bool resul = mngFactura.SaveFactura(cliente, factura, lfs);
+            Assert.IsFalse(resul);
         }
     }
 }
