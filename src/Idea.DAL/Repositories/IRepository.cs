@@ -8,17 +8,13 @@ using System.Threading.Tasks;
 
 namespace Idea.DAL.Repositories
 {
-    public interface IRepository<T> where T:class
+    public interface IRepository 
     {
-        void Add(T entity);
-        void Remove(T entity);
-        T Find(Int32 Id);
-    }
-
-    public interface IRepository
-    {
-        void Add(EntityBase entity);
-        void Remove(EntityBase entity);
-        EntityBase Find(Int32 Id);
+        T GetById<T>(Int32 primaryKey) ;
+        IEnumerable<T> GetAll<T>() ;
+        PagedResult<T> PagedQuery<T>(Int32 pageNumber, Int32 pageSize) ;
+        void Insert<T>(T itemToAdd) ;
+        void Update<T>(T itemToUpdate, Int32 primaryKeyValue) ;
+        void Delete<T>(Int32 primaryKeyValue) ;
     }
 }

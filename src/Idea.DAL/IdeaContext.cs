@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Idea.DAL
 {
-    public abstract class IdeaContext: DbContext
+    public class IdeaContext: DbContext  
     {
         public ILogger log { get; set; }
     }

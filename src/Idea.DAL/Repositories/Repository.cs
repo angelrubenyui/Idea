@@ -1,39 +1,63 @@
-﻿using Idea.Common.Exceptions;
+﻿using System.Linq;
+using System.Threading;
+using Idea.Common.Exceptions;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using Idea.Models.Entities;
 
 namespace Idea.DAL.Repositories
 {
-    public class Repository<T> : IRepository<T> where T:class
+    public class Repository<T> : IRepository 
     {
-        IdeaContext _context;
-        IDbSet<T> _dbSet;
-        
+        private IUnitOfWork mUnitOfWork { get; set; } 
+
         public Repository() 
         {
             throw new EFContextNotSetException();
         }
 
-        public Repository(IdeaContext context)
+        public Repository(IUnitOfWork unitOfWork )
         {
-            _context = context;
-            _dbSet = context.Set<T>();
+            mUnitOfWork = unitOfWork;
         }
-        
-        public void Add(T entity) 
+   
+        public T GetById<T>(Int32 primaryKey)
         {
-            _dbSet.Add(entity);
-        }
-
-        public void Remove(T entity) 
-        {
-            _dbSet.Remove(entity);
+            return (T)mUnitOfWork.Context.Set(typeof(T)).Find(primaryKey);
         }
 
-        public T Find(Int32 Id)
+        public IEnumerable<T> GetAll<T>() 
         {
-            return (T)_dbSet.Find(Id);
+            return (IEnumerable<T>)mUnitOfWork.Context.Set(typeof(T)).
         }
 
-}
+        public PagedResult<T> PagedQuery<T>(Int32 pageNumber, Int32 pageSize) 
+        {
+            PagedResult<T> myPageResult = new PagedResult<T>();
+            myPageResult.Collection = (IEnumerable<T>) mUnitOfWork.Context.entities.Select(m => m).Skip(pageSize * pageNumber).Take(pageSize).AsEnumerable();
+            myPageResult.NumberOfRegisters = mUnitOfWork.Context.entities.Count();
+            myPageResult.CurrentPage = pageNumber;
+            myPageResult.TotalPages = (myPageResult.NumberOfRegisters/pageSize) +
+                                      ((myPageResult.NumberOfRegisters%pageSize > 0) ? 1 : 0);
+            return myPageResult;
+
+        }
+
+        public void Insert<T>(T itemToAdd) 
+        {
+            mUnitOfWork.Context.Set(typeof(T)).Add(itemToAdd);
+        }
+
+        public void Update<T>(T itemToUpdate, Int32 primaryKeyValue)
+        {
+            var entity2Update = this.GetById<T>(primaryKeyValue);
+                entity2Update = itemToUpdate;
+        }
+
+        public void Delete<T>(Int32 primaryKeyValue)
+        {
+            mUnitOfWork.Context.Set(typeof (T)).Remove(primaryKeyValue);
+        }
+    }
 }

@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace Idea.DAL.Repositories
 {
-    public interface IUnitOfWork<T> where T:class
+    public interface IUnitOfWork 
     {
-        IRepository<T> Repository { get; }
-        void SaveChanges();
+        IdeaContext Context { get; set; }
+        void Commit();
     }
 
-    public interface IUnitOfWork
-    {
-        IRepository Repository { get; }
-        void SaveChanges();
-    }
+    
 }

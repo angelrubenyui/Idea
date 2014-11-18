@@ -1,35 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Idea.Models.Entities;
 
 namespace Idea.DAL.Repositories
 {
-    public class UnitOfWork<T> : IUnitOfWork<T> where T:class
+    public class UnitOfWork<T> : IUnitOfWork, IDisposable where T:class
     {
-        private IdeaContext _context;
-        private IRepository<T> _Repository;
+        public IdeaContext Context { get; set; }
+        
 
         public UnitOfWork(IdeaContext context)
         {
-            _context = context;
+            Context = context;
         }
 
-        public IRepository<T> Repository
+        public UnitOfWork()
         {
-            get
-            {
-                if (_Repository == null)
-                {
-                    _Repository = new Repository<T>(_context);
-                }
-                return _Repository;
-            }
+            Context = new IdeaContext();
+            Context.Configuration.AutoDetectChangesEnabled = false;
+            Context.Configuration.LazyLoadingEnabled = true;
+            Context.Configuration.ValidateOnSaveEnabled = false;
         }
-        public void SaveChanges()
+
+        public void Commit()
         {
-            _context.SaveChanges();
+            Context.SaveChanges();
         }
+
+        public void Dispose()
+        {
+            Context.Dispose();
+        }
+
+       
     }
 }

@@ -38,13 +38,7 @@ namespace Idea.Models.Entities
         public Boolean IsValid(Cliente cliente)
         {
             Boolean ret = true;
-<<<<<<< HEAD
-            //Validaciones de DataAnnotations
 
-
-=======
->>>>>>> origin/master
-            //Validaciones De Negocio
             if (!IsDNIValid(cliente))
             {
                 Arguments.Add(new ValidationArguments("Validación de Cliente: DNI Incorrecto"));
