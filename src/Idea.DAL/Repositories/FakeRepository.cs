@@ -28,7 +28,7 @@ namespace Idea.DAL
 
         public IEnumerable<T> Query<T>()  
         {
-            return (IEnumerable<T>)uw.getAll();
+            return (IEnumerable<T>)uw.getAll<T>();
         }
 
         public Page<T> PagedQuery<T>(long pageNumber, long itemsPerPage, string sql, params object[] args)

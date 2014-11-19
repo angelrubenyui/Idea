@@ -4,11 +4,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Idea.Bussiness.Integration.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class TestSaveFacturaAndLoad
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestSaveFacturaAndLoadFromDataBase()
         {
+            Assert.IsFalse(true);
         }
     }
 }

@@ -71,9 +71,14 @@ namespace Idea.DAL.Repositories
             get { throw new NotImplementedException(); }
         }
 
-        internal ICollection getAll()
+        internal IEnumerable<T> getAll<T>()
         {
-            return _db.Values;
+            List<T> colection= new List<T>();
+            foreach (var value in _db.Values)
+            {
+                if(value.GetType()==typeof(T)) colection.Add((T)value);
+            }
+            return colection.AsEnumerable();
         }
     }
 }
